@@ -33,6 +33,6 @@ notifications:
     use_notice: true
   email:
     recipients:
-      - rumpkernel-builds@freelists.org
+      - bad@bsd.de
     on_success: always
     on_failure: always
