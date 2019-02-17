@@ -134,6 +134,7 @@ mkdir -p hostlib/lib
 )
 (
 	cd ${RUMPSRC}/lib/librumpclient
+	${RUMPMAKE} obj
 	${RUMPMAKE} includes \
 	    && ${RUMPMAKE} MKMAN=no dependall \
 	    && ${RUMPMAKE} MKMAN=no install
@@ -145,7 +146,7 @@ appendconfig RUMPMAKE
 
 usermtree rump
 userincludes ${RUMPSRC} ${LIBS}
-( cd ${RUMPSRC}/lib/librumpclient && ${RUMPMAKE} includes )
+( cd ${RUMPSRC}/lib/librumpclient && ${RUMPMAKE} obj && ${RUMPMAKE} includes )
 
 for lib in ${LIBS}; do
 	[ "${lib%libpthread}" = "${lib}" ] || continue
