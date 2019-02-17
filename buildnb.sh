@@ -64,7 +64,7 @@ ${MAKE} --version | grep -q 'GNU Make' \
 set -e
 
 # Check sources
-if git submodule status ${RUMPSRC} 2>/dev/null | grep -q '^-' \
+if [ ! -d ${RUMPSRC}/CVS ]  && git submodule status ${RUMPSRC} 2>/dev/null | grep -q '^-' \
     || git submodule status buildrump.sh 2>/dev/null | grep -q '^-'
 then
 	echo '>>'
@@ -72,7 +72,7 @@ then
 	echo '>>'
 	exit 1
 fi
-if git submodule status ${RUMPSRC} 2>/dev/null | grep -q '^+' \
+if [ ! -d ${RUMPSRC}/CVS ] && git submodule status ${RUMPSRC} 2>/dev/null | grep -q '^+' \
     || git submodule status buildrump.sh 2>/dev/null | grep -q '^+'
 	then
 	echo '>>'
