@@ -4,3 +4,4 @@
 [submodule "rumpsrc"]
 	path = src-netbsd
 	url = ../src-netbsd.git
+	branch = all-src
