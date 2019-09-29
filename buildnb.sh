@@ -8,7 +8,7 @@ appendconfig ()
 }
 
 STDJ='-j4'
-EXTRAFLAGS="${STDJ}"
+EXTRAFLAGS=
 TESTS=false
 BUILDZFS=false
 RUMPSRC=src-netbsd
@@ -22,13 +22,16 @@ type ${MAKE} >/dev/null 2>&1 || die '"make" required but not found'
 
 # XXX TODO set FLAGS from -F options here to pass to buildrump.sh
 
-while getopts '?Hqs:' opt; do
+while getopts '?Hqj:s:' opt; do
 	case "$opt" in
 	"H")
 		EXTRAFLAGS="${EXTRAFLAGS} -H"
 		;;
 	"q")
 		BUILD_QUIET=${BUILD_QUIET:=-}q
+		;;
+	"j")
+		STDJ=-j${OPTARG}
 		;;
 	"s")
 		RUMPSRC=${OPTARG}
@@ -38,6 +41,8 @@ while getopts '?Hqs:' opt; do
 	esac
 done
 shift $((${OPTIND} - 1))
+
+EXTRAFLAGS="${STDJ}"
 
 for arg in "$@"; do
 	case ${arg} in
