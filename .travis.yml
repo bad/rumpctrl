@@ -1,25 +1,14 @@
 language: c
 os: linux
 sudo: false
+compiler:
+  - gcc
+  - clang
+env:
+  - ZFS=
 
 before_install:
  - git submodule update --init --recursive
-
-matrix:
-  include:
-    - env: ZFS= CC=gcc
-      compiler: gcc
-    - env: ZFS= CC=clang
-      compiler: clang
-    - env: ZFS= CC=clang-3.6
-      compiler: clang-3.6
-      addons: &clang36
-        apt:
-          packages:
-            - clang-3.6
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
 
 script:
    - ( cd buildrump.sh && ./buildrump.sh -s ../src-netbsd -V MKSTATICLIB=no -qq fullbuild )
