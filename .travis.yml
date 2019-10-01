@@ -7,9 +7,6 @@ compiler:
 env:
   - ZFS=
 
-before_install:
- - git submodule update --init --recursive
-
 script:
    - ( cd buildrump.sh && ./buildrump.sh -s ../src-netbsd -V MKSTATICLIB=no -qq fullbuild )
    - ./buildnb.sh -qq ${ZFS} tests ./buildrump.sh/rump
